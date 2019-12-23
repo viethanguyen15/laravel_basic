@@ -64,7 +64,9 @@ class UserController extends Controller
     }
     function search(request $r){
         //dd($r->all());
-        $data['users'] = User::where('full', 'like', '%'.$r->search.'%')->paginate();//tim gan giong:like,  tim ban ghi co dieu kien gi do
+        $data['users'] = User::where('full', 'like', '%'.$r->search.'%')->paginate()//tim gan giong:like,  tim ban ghi co dieu kien gi do
+        ->orWhere('phone', 'like', '%'.$r->search.'%')
+        ->paginate();
         return view('user', $data);
     }
 
